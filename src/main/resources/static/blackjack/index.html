@@ -566,13 +566,13 @@
         if (money < bet) {
             bet = money;
         }
+        // 내가 가진 보유 금액이 배팅금액 이하일 경우 올인
+        else if (money == bet){
+            alert("ALL-IN");
+        }
         // 배팅 금액이 없을경우
         if (money == 0){
             alert("배팅할 금액이 부족합니다.");
-        }
-        // 배팅할 금액보다 내가 가진 금액이 더 작다면 올인
-        else if (money <= currentBet) {
-            alert("ALL-IN");
         }
 
         $('#bet').html(currentBet + bet);

@@ -66,6 +66,13 @@ public class BlackApiController {
         return blackjackService.bet(roomId, user, betMoney);
     }
 
+    @PostMapping(value = "/rooms/{roomId}/doubledown", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public GameRoom doubledown(@RequestHeader("name") String name, @PathVariable String roomId, @RequestBody long betMoney) {
+        User user = this.getUserFromSession(name);
+
+        return blackjackService.doubledown(roomId, user, betMoney);
+    }
+
     @PostMapping("/rooms/{roomId}/hit")
     public GameRoom hit(@RequestHeader("name") String name, @PathVariable String roomId) {
         User user = this.getUserFromSession(name);

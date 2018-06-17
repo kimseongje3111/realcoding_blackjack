@@ -50,6 +50,14 @@ public class BlackjackService {
         return gameRoom;
     }
 
+    public GameRoom doubledown(String roomId, User user, long bet) {
+        GameRoom gameRoom = gameRoomMap.get(roomId);
+
+        gameRoom.bet(user.getName(), bet);
+
+        return gameRoom;
+    }
+
     public GameRoom hit(String roomId, User user) {
         GameRoom gameRoom = gameRoomMap.get(roomId);
 

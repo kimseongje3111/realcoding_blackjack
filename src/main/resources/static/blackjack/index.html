@@ -558,10 +558,21 @@
     $('#more').click(function(){
         var bet = 1000; //기본 배팅 금액을 1000원 단위로 수정함, + 버튼 클릭시 1000원 단위로 증가
         var currentBet = parseInt($('#bet').html());
-        if(currentBet==10000) bet=0;
+        if(currentBet == 10000){ // 배팅금액의 상한선은 10000원
+            alert("10000원 이상 배팅 할 수 없습니다.");
+            bet = 0;
+        }
         var money = parseInt($('#money').html());
         if (money < bet) {
             bet = money;
+        }
+        // 배팅 금액이 없을경우
+        if (money == 0){
+            alert("배팅할 금액이 부족합니다.");
+        }
+        // 배팅할 금액보다 내가 가진 금액이 더 작다면 올인
+        else if (money <= currentBet) {
+            alert("ALL-IN");
         }
 
         $('#bet').html(currentBet + bet);

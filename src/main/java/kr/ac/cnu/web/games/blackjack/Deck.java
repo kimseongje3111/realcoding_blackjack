@@ -42,6 +42,12 @@ public class Deck {
             // 코드에 그런 내용이 들어가야 함.
             throw new NoMoreCardException();
         }
+        // 다음 카드 드로우시 덱에 남은 카드가 10장 이하라면
+        else if (cardList.size() <= 10){
+            // 덱을 다시 구성하고 셔플한다.
+            createCards(number);
+            Collections.shuffle(cardList);
+        }
         return cardList.remove(0);
     }
 

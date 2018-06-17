@@ -21,9 +21,16 @@ public class Evaluator {
 
         int dealerResult = dealer.getHand().getCardSum();
 
-        if (dealerResult > 21) {
-            playerMap.forEach((s, player) -> player.win());
-
+        if (dealerResult > 21) {//딜러의 카드 합이 21이 넘을때 무조건 플레이어가 이기도록 구현되어 있던 부분을 바꾸었다.
+            playerMap.forEach((s, player) -> {
+                        if( player.getHand().getCardSum() > 21){
+                            player.lost();
+                        }
+                        else{
+                            player.win();
+                        }
+                    }
+            );
             return true;
         }
 

@@ -419,6 +419,7 @@
 </div>
 <div class="page" id="game" style="display: none">
     <div>
+        <b><div id="showRobin"></div></b>
         <b>Available Funds</b><br>
         <span id="money" class="money"></span>
         <div class="clear"></div>
@@ -448,6 +449,8 @@
 
     $('#login_button').click(function() {
         var loginName = $('#input_login_name').val();
+        console.log(loginName);
+        document.getElementById("showRobin").innerHTML = loginName;
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/login',
@@ -462,6 +465,7 @@
 
     $('#signup_button').click(function() {
         var loginName = $('#input_login_name').val();
+
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/users',

@@ -49,6 +49,12 @@ public class Player {
         currentBet = 0;
     }
 
+    public void blackjackWin() {//블랙잭으로 승리시 배팅금액의 1.5배를 받게된다.
+        balance += currentBet * 1.5;
+        currentBet = 0;
+    }
+
+
     public void tie() {
         balance += currentBet;
         currentBet = 0;

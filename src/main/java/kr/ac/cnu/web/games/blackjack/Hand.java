@@ -34,7 +34,7 @@ public class Hand {
                                 CardSum[0] += 10;
                             }
                             // 카드가 ACE 일 경우
-                            if(Card.getRank() == 1){
+                            else if(Card.getRank() == 1){
                                 // ACE를 11로 했을때 21이 넘어버림 -> ACE = 1
                                 if (CardSum[0] > 11){
                                     CardSum[0] += 1;

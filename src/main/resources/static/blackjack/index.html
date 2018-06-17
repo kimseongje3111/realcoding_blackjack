@@ -555,6 +555,7 @@
     $('#more').click(function(){
         var bet = 1000; //기본 배팅 금액을 1000원 단위로 수정함, + 버튼 클릭시 1000원 단위로 증가
         var currentBet = parseInt($('#bet').html());
+        if(currentBet==10000) bet=0;
         var money = parseInt($('#money').html());
         if (money < bet) {
             bet = money;

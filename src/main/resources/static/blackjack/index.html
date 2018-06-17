@@ -530,14 +530,16 @@
     })
 
     $('#stand').click(function() {
+        var Prebet = parseInt($('#bet').html());
+
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/stand',
             headers: {
                 'name':user.name
             },
-        }).done(function(data) {
-            drawGameRoom(data);
+        }).done(function(data) { // 다음 게임 진행시 초기 배팅 금액은 이전의 배팅 금액
+            drawGameRoom(data,Prebet);
         });
     })
 
@@ -631,6 +633,47 @@
         }
 
         $('#bet').html(gameRoom.playerList[user.name].currentBet);
+        $('#money').html(gameRoom.playerList[user.name].balance);
+    }
+
+    // 다음 게임 진행시 초기 배팅 금액은 이전의 배팅 금액
+    function drawGameRoom(gameRoom,prebet) {
+        console.log(gameRoom);
+        if (gameRoom.finished) {
+            $('#deal').show();
+            $('#more').show();
+            $('#less').show();
+            $('#hit').hide();
+            $('#stand').hide();
+            $('#DoubleDown').hide();
+        } else {
+            $('#deal').hide();
+            $('#more').hide();
+            $('#less').hide();
+            $('#hit').show();
+            $('#stand').show();
+        }
+
+        $('.dealer-cards').html("");
+        gameRoom.dealer.hand.cardList.forEach(function(card) {
+            $('.dealer-cards').append(generateCardDiv(card.rank, card.suit));
+        })
+        if (gameRoom.dealer.hand.cardList.length == 1) {
+            $('.dealer-cards').append('<div class="card card2 flipped" data-value="6"></div>');
+        }
+        if (gameRoom.dealer.hand.cardList.length > 0) {
+            $('.dealer-cards').append('<div id="dealerTotal" class="dealer-total">' + gameRoom.dealer.hand.cardSum + '</div>')
+        }
+
+        $('.player-cards').html("");
+        gameRoom.playerList[user.name].hand.cardList.forEach(function(card) {
+            $('.player-cards').append(generateCardDiv(card.rank, card.suit));
+        });
+        if (gameRoom.playerList[user.name].hand.cardList.length > 0) {
+            $('.player-cards').append('<div id="playerTotal" class="player-total">' + gameRoom.playerList[user.name].hand.cardSum + '</div>')
+        }
+
+        $('#bet').html(prebet);
         $('#money').html(gameRoom.playerList[user.name].balance);
     }
 

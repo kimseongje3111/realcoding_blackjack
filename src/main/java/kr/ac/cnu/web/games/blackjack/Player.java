@@ -50,7 +50,7 @@ public class Player {
     }
 
     public void blackjackWin() {//블랙잭으로 승리시 배팅금액의 1.5배를 받게된다.
-        balance += currentBet * 1.5;
+        balance += currentBet * 2.5; //수정
         currentBet = 0;
     }
 

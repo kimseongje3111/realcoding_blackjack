@@ -29,6 +29,10 @@ public class Hand {
         cardList.stream()
                 .forEach(
                         Card -> {
+                            // J, Q, K 는 10으로 계산
+                            if(Card.getRank() == 11 || Card.getRank() == 12 || Card.getRank() == 13){
+                                CardSum[0] += 10;
+                            }
                             // 카드가 ACE 일 경우
                             if(Card.getRank() == 1){
                                 // ACE를 11로 했을때 21이 넘어버림 -> ACE = 1

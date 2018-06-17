@@ -24,7 +24,28 @@ public class Hand {
     }
 
     public int getCardSum() {
-        return cardList.stream().mapToInt(card -> card.getRank()).sum();
+        final int[] CardSum = {0};
+
+        cardList.stream()
+                .forEach(
+                        Card -> {
+                            // 카드가 ACE 일 경우
+                            if(Card.getRank() == 1){
+                                // ACE를 11로 했을때 21이 넘어버림 -> ACE = 1
+                                if (CardSum[0] > 11){
+                                    CardSum[0] += 1;
+                                }
+                                else{
+                                    CardSum[0] += 11;
+                                }
+                            }
+                            else{
+                                CardSum[0] += Card.getRank();
+                            }
+                        }
+                );
+
+        return CardSum[0];
     }
 
     public void reset() {

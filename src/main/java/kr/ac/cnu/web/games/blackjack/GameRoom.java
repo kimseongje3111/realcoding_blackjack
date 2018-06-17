@@ -61,7 +61,7 @@ public class GameRoom {
     public Card hit(String name) {
         Player player = playerList.get(name);
         Card card = player.hitCard();           //hitCard를 실행시켜서 return 시에 해줬던걸 미리 해준다.
-        if(player.getHand().getCardSum() > 21){//만약 hit한 후 결과가 21이 넘는다면
+        if(player.getHand().getCardSum() > 21){ //만약 hit한 후 결과가 21이 넘는다면
             player.stand();                     //플레이어를 stand() 시켜주고
             evaluator.evaluate();               //evaluate()를 실행시킨다.
             this.isFinished = true;             //현재 객체의 상태를 true로 변환해준다.

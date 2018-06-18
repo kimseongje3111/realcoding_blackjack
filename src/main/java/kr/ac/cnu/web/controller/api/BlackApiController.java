@@ -3,6 +3,7 @@ package kr.ac.cnu.web.controller.api;
 import kr.ac.cnu.web.exceptions.NoLoginException;
 import kr.ac.cnu.web.exceptions.NoUserException;
 import kr.ac.cnu.web.games.blackjack.GameRoom;
+import kr.ac.cnu.web.games.blackjack.Player;
 import kr.ac.cnu.web.model.User;
 import kr.ac.cnu.web.repository.UserRepository;
 import kr.ac.cnu.web.service.BlackjackService;
@@ -69,22 +70,49 @@ public class BlackApiController {
     @PostMapping(value = "/rooms/{roomId}/doubledown", consumes = MediaType.APPLICATION_JSON_VALUE)
     public GameRoom doubledown(@RequestHeader("name") String name, @PathVariable String roomId, @RequestBody long betMoney) {
         User user = this.getUserFromSession(name);
+        // 해당 이름의 플레이어 호출
+        Player player = blackjackService.getGameRoom(roomId).getPlayerList().get(name);
 
-        return blackjackService.doubledown(roomId, user, betMoney);
+        // 더블다운 후 보유금액 업데이트
+        GameRoom gameRoom = blackjackService.doubledown(roomId,user,betMoney);
+        // TODO set account
+        user.setAccount(player.getBalance());
+        // TODO save user
+        userRepository.save(user);
+
+        return gameRoom;
     }
 
     @PostMapping("/rooms/{roomId}/hit")
     public GameRoom hit(@RequestHeader("name") String name, @PathVariable String roomId) {
         User user = this.getUserFromSession(name);
+        // 해당 이름의 플레이어 호출
+        Player player = blackjackService.getGameRoom(roomId).getPlayerList().get(name);
 
-        return blackjackService.hit(roomId, user);
+        // 히트 후 보유금액 업데이트
+        GameRoom gameRoom = blackjackService.hit(roomId,user);
+        // TODO set account
+        user.setAccount(player.getBalance());
+        // TODO save user
+        userRepository.save(user);
+
+        return gameRoom;
     }
 
     @PostMapping("/rooms/{roomId}/stand")
     public GameRoom stand(@RequestHeader("name") String name, @PathVariable String roomId) {
         User user = this.getUserFromSession(name);
+        // 해당 이름의 플레이어 호출
+        Player player = blackjackService.getGameRoom(roomId).getPlayerList().get(name);
 
-        return blackjackService.stand(roomId, user);
+        // 스탠드 후 보유금액 업데이트
+        GameRoom gameRoom = blackjackService.stand(roomId,user);
+        // TODO set account
+        user.setAccount(player.getBalance());
+        // TODO save user
+        userRepository.save(user);
+
+        return gameRoom;
     }
 
     @GetMapping("/rooms/{roomId}")

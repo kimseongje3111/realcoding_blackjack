@@ -8,6 +8,7 @@ import kr.ac.cnu.web.model.User;
 import kr.ac.cnu.web.repository.UserRepository;
 import kr.ac.cnu.web.service.BlackjackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
-import java.awt.*;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -113,6 +113,12 @@ public class BlackApiController {
         userRepository.save(user);
 
         return gameRoom;
+    }
+
+    @PostMapping("/rooms/{roomid}/rank")
+    public List rank(@RequestHeader("name") String name, @PathVariable String roomid){
+        List<User> users = userRepository.findAll(new Sort(Sort.Direction.DESC, "account"));
+        return users;
     }
 
     @GetMapping("/rooms/{roomId}")

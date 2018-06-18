@@ -446,9 +446,12 @@
     </div>
 </div>
 <div class="page" id="lobby" style="display: none">
-    <div>
+    <div style="border: 2px blue dotted; background: lavender; border-radius: 5px">
+        <p style="color: brown; size: 20px;"><span><i>룸 생성</i></span></p>
         <div class="buttons"><div class="btn" id="create_room_button">Create</div></div>
+        <img src="imagee/BlackJack1.gif" style="margin: 10px;">
     </div>
+
 </div>
 <div class="wrapper">
     <div class="page" id="game" style="display: none">
@@ -479,6 +482,9 @@
         <div id = "rank">
 
         </div>
+    </div>
+    <div id="hitme" style="display: none">
+        <img src="imagee/HitMe.gif" style="width: 300px; height: 300px; margin: 10px;">
     </div>
 
 </div>
@@ -535,6 +541,7 @@
             $('#game').show();
             $('#haha').show();
             $('#rankwrapper').show();
+            $('#hitme').show();
             gameRoomId = data.roomId;
             drawGameRoom(data);
         });

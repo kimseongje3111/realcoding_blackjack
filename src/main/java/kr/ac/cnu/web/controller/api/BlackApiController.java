@@ -115,8 +115,10 @@ public class BlackApiController {
         return gameRoom;
     }
 
+    // 랭크 컨트롤러
     @PostMapping("/rooms/{roomid}/rank")
     public List rank(@RequestHeader("name") String name, @PathVariable String roomid){
+        // 유저 레퍼스토리에 모든 원소들을 내림차순 정렬하여 리스트로 리턴
         List<User> users = userRepository.findAll(new Sort(Sort.Direction.DESC, "account"));
         return users;
     }

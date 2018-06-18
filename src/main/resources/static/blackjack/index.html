@@ -651,13 +651,14 @@
             $('#stand').show();
         }
 
+        // 랭크 출력을 위한 ajax 사용
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/rank',
             headers: {
                 'name': user.name
             },
-        }).done(function (data) {
+        }).done(function (data) { //데이터 받아와 리스트 형태로 append 해줌
             var Inputhtml = '';
             $('#rank').empty();
             for(var i = 0; i < data.length; i++){
@@ -708,13 +709,14 @@
             $('#stand').show();
         }
 
+        // 랭크 출력을 위한 ajax 사용
         $.ajax({
             type: 'POST',
             url: 'http://localhost:8080/api/black-jack/rooms/' + gameRoomId + '/rank',
             headers: {
                 'name': user.name
             },
-        }).done(function (data) {
+        }).done(function (data) { //데이터 받아와 리스트 형태로 append 해줌
             var Inputhtml = '';
             $('#rank').empty();
             for(var i = 0; i < data.length; i++){

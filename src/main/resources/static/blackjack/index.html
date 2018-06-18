@@ -590,11 +590,12 @@
             headers: {
                 'name':user.name
             },
-            data: JSON.stringify(bet*2),
+            data: JSON.stringify(bet),
             contentType:'application/json;',
         }).done(function(data) {
             drawGameRoom(data);
             $('#DoubleDown').hide();
+            $('#bet').html(bet*2); // 배팅금액 두배
         });
     })
 
